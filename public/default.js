@@ -7,6 +7,7 @@
         var myGames = [];
         var source;
         var target;
+        var ccounter;
         socket = io();
 
         //////////////////////////////
@@ -80,8 +81,6 @@
 
             if (typeof msg.select !== "undefined") { board.highlight_select(msg.select); }
 
-            if (typeof msg.reset !== "undefined") { board.remove_highlight();}
-
             /*
             letters.forEach(function (element) {
                 for (var i = 1; i <= 8; i++) {
@@ -95,12 +94,6 @@
         socket.on('logout', function (msg) {
             removeUser(msg.username);
         });
-
-        /*socket.on('rpi', function (msg) {
-            var a = 1;
-            $('#' + SQUARE_ELS_IDS["c6"]).addClass(CSS.highlight1); // your code 
-        });
-        */
 
         //////////////////////////////
         // Menus
@@ -234,7 +227,7 @@
 
         };
 
-        // update the board position after the piece snap 
+        // update the board position after the piece snap
         // for castling, en passant, pawn promotion
         var onSnapEnd = function () {
             board.position(game.fen());
